@@ -1,13 +1,28 @@
-const express = require('express')
+const express = require("express");
 
-const app = express()
+const app = express();
 
-app.get("/user/:userId/:name/:password", (req,res) => {
-    console.log(req.params)
-    res.send({firstName:'Dinesh',lastName:'Surineni'})
-})
-
+app.use(
+  "/user",
+  (req, res, next) => {
+    console.log('Handling the route user 1')
+    // res.send("Response 1");
+    next();
+  },
+  (req, res) => {
+    console.log('Handling the route user 2')
+    res.send("response 2");
+  },
+  (req, res) => {
+    console.log('Handling the route user 3')
+    res.send("response 3");
+  },
+  (req, res) => {
+    console.log('Handling the route user 4')
+    res.send("response 4");
+  },
+);
 
 app.listen(3000, () => {
-    console.log('app is successfully listening to port')
-})
+  console.log("app is successfully listening to port");
+});
